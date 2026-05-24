@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — TextForge</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+      color: #1a1a1a;
+      line-height: 1.7;
+    }
+    h1 { font-size: 2rem; margin-bottom: 4px; }
+    h2 { font-size: 1.2rem; margin-top: 36px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+    .meta { color: #666; font-size: 0.9rem; margin-bottom: 40px; }
+    a { color: #e05a2b; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    .highlight {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin: 24px 0;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Privacy Policy</h1>
+  <p class="meta">
+    TextForge — Local AI Writing Assistant<br>
+    Effective date: May 24, 2026<br>
+    Contact: <a href="mailto:sunilmore690@gmail.com">sunilmore690@gmail.com</a>
+  </p>
+
+  <div class="highlight">
+    TextForge does not collect, transmit, or store any of your data on any external server. Your text never leaves your machine.
+  </div>
+
+  <h2>What TextForge does</h2>
+  <p>
+    TextForge is a Chrome extension that rewrites, summarizes, and edits text in your browser's text fields. It sends your text only to a local AI server running on your own computer (such as Ollama or LM Studio) via an endpoint URL that you configure. No third party ever receives your text.
+  </p>
+
+  <h2>Data we do NOT collect</h2>
+  <ul>
+    <li>We do not collect the text you write or edit.</li>
+    <li>We do not collect any personally identifiable information.</li>
+    <li>We do not use analytics, crash reporting, or tracking of any kind.</li>
+    <li>We do not transmit data to any server we operate.</li>
+  </ul>
+
+  <h2>What is stored locally</h2>
+  <p>
+    TextForge stores the following settings using <code>chrome.storage.sync</code>:
+  </p>
+  <ul>
+    <li><strong>Endpoint URL</strong> — the address of your local AI server (e.g. <code>http://localhost:11434</code>)</li>
+    <li><strong>Model name</strong> — the AI model you selected</li>
+    <li><strong>API key</strong> — optional bearer token for authenticated local endpoints</li>
+  </ul>
+  <p>
+    These settings are synced across your own Chrome profiles via Google's built-in Chrome Sync infrastructure. They are never sent to us or any third party beyond Google's standard Chrome Sync service, which is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+  </p>
+
+  <h2>Network access</h2>
+  <p>
+    The extension requests broad network permissions (<code>http://*/*</code> and <code>https://*/*</code>) solely to allow the content script to fetch from your user-configured AI endpoint, which can be any IP address on your local network (e.g. a second machine running Ollama). The extension makes no outbound requests other than to the endpoint URL you explicitly set in the settings popup.
+  </p>
+
+  <h2>Permissions explained</h2>
+  <ul>
+    <li><strong>storage</strong> — saves your endpoint, model, and API key settings locally</li>
+    <li><strong>activeTab</strong> — injects the floating icon into the page you are actively viewing</li>
+    <li><strong>host_permissions (all URLs)</strong> — allows the content script to call your configured localhost or local-network AI endpoint from any page</li>
+  </ul>
+
+  <h2>Children's privacy</h2>
+  <p>
+    TextForge is not directed at children under 13. We do not knowingly collect any information from children.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, the updated version will be posted at this URL with a new effective date. Continued use of the extension after any change constitutes acceptance of the updated policy.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions? Email <a href="mailto:sunilmore690@gmail.com">sunilmore690@gmail.com</a>.
+  </p>
+
+</body>
+</html>

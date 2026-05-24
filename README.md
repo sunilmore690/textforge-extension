@@ -130,5 +130,7 @@ Press `Esc` to cancel the preview at any time.
 
 ## Privacy
 
-TextForge connects only to `http://localhost:11434` (Ollama on your own machine). Your text is never sent to any external server. You can verify this in `chrome://extensions` → TextForge → "Inspect views" → Network tab.
+TextForge connects only to the endpoint you configure (default: `http://localhost:11434`). Your text is never sent to any external server. You can verify this in `chrome://extensions` → TextForge → "Inspect views" → Network tab.
+
+[Full Privacy Policy](https://sunilmore690.github.io/textforge-extension/privacy-policy.html)
 # textforge-extension
