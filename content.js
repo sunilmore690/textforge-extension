@@ -446,10 +446,15 @@ document.addEventListener('focusin', (e) => {
 
 document.addEventListener('focusout', () => {
   setTimeout(() => {
+    const active = document.activeElement;
+    // Keep icon if focus moved to another editable field, the icon itself, or the menu
     if (state.iconEl && !state.iconEl.matches(':hover') &&
         (!state.menuEl || state.menuEl.style.display !== 'block') &&
-        !state.modalEl) {
+        !state.modalEl &&
+        !isEditable(active) &&
+        active !== state.iconEl) {
       state.iconEl.style.display = 'none';
+      state.activeField = null;
     }
   }, 200);
 });
