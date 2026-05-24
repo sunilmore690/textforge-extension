@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build extension zip
+        run: |
+          mkdir -p dist
+          zip -r dist/textforge-${{ steps.version.outputs.VERSION }}.zip . \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "CLAUDE.md" \
+            --exclude "dist/*" \
+            --exclude "*.zip" \
+            --exclude ".gitignore" \
+            --exclude ".DS_Store" \
+            --exclude "scripts/*"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "TextForge v${{ steps.version.outputs.VERSION }}"
+          body: |
+            ## TextForge v${{ steps.version.outputs.VERSION }}
+
+            Download `textforge-${{ steps.version.outputs.VERSION }}.zip` below and follow the manual install steps.
+
+            ### Install (Developer Mode)
+            1. Unzip the downloaded file
+            2. Open `chrome://extensions` in Chrome
+            3. Toggle **Developer mode** ON (top-right corner)
+            4. Click **Load unpacked** → select the unzipped folder
+            5. Click the TextForge icon in your toolbar to configure your local AI endpoint
+
+            ### Setup your local AI
+            See the [README](https://github.com/${{ github.repository }}#readme) for full setup instructions (Ollama, LM Studio, etc.).
+          files: dist/textforge-${{ steps.version.outputs.VERSION }}.zip
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

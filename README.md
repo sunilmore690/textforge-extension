@@ -1,5 +1,8 @@
 # TextForge — Local AI Writing Assistant
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Install-blue?logo=googlechrome&logoColor=white)](https://chrome.google.com/webstore/detail/EXTENSION_ID)
+[![GitHub Release](https://img.shields.io/github/v/release/sunilmore690/textforge-extension?label=GitHub%20Release&logo=github)](https://github.com/sunilmore690/textforge-extension/releases/latest)
+
 A Chrome extension that adds a floating icon to every text field. Click it to humanize, summarize, formalize, or fix your writing — all powered by a model running locally on your machine. Nothing ever leaves your computer.
 
 TextForge talks to any **OpenAI-compatible** local server, so it works with **Ollama**, **LM Studio**, **llama.cpp**, **Jan**, **vLLM**, **LocalAI**, and others — you just point it at the endpoint.
@@ -12,6 +15,25 @@ It also **auto-tunes its prompts to the selected model's size**: smaller models 
 - **Free** — no subscription, no token limits
 - **Preview before replace** — always confirm the suggested rewrite before it touches your text
 - **Works everywhere** — Gmail, LinkedIn, Twitter, GitHub, any normal text field
+
+## Installation
+
+### Option A: Chrome Web Store *(recommended)*
+1. Visit the [TextForge listing on the Chrome Web Store](https://chrome.google.com/webstore/detail/EXTENSION_ID)
+2. Click **Add to Chrome**
+3. Continue with **Setup** below to configure your local AI endpoint
+
+### Option B: Manual Install (Developer Mode — for technical users)
+1. Download the latest `textforge-x.x.x.zip` from [GitHub Releases](https://github.com/sunilmore690/textforge-extension/releases/latest)
+2. Unzip it to a **permanent folder** (do not delete the folder after loading)
+3. Open `chrome://extensions` in Chrome
+4. Toggle **Developer mode** ON (top-right corner)
+5. Click **Load unpacked** → select the unzipped `textforge-extension` folder
+6. Continue with **Setup** below to configure your local AI endpoint
+
+> **Note:** Extensions loaded in Developer Mode show a banner each time Chrome starts. This is expected and harmless.
+
+---
 
 ## Setup (one-time, ~5 minutes)
 
