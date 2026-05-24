@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "TextForge - Local AI Writing Assistant",
+  "version": "1.1.0",
+  "description": "Rewrite, summarize, humanize, and polish text in any text field. Works with Ollama, LM Studio, and any OpenAI-compatible local AI. 100% private.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TextForge Settings"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

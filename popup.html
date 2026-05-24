@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 330px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+      margin: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #f97316, #db2777);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .brand-name { font-size: 15px; font-weight: 600; color: #111827; }
+    .brand-tag { font-size: 11px; color: #6b7280; }
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+    }
+    label, .label-row > span:first-child {
+      display: block;
+      color: #374151;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .link-btn {
+      background: none;
+      border: none;
+      color: #f97316;
+      font-size: 11px;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
+    }
+    .link-btn:hover { text-decoration: underline; }
+    .row-with-btn {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    input, select {
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 13px;
+      box-sizing: border-box;
+      background: white;
+      font-family: inherit;
+    }
+    input:focus, select:focus { outline: none; border-color: #f97316; }
+    .icon-btn {
+      flex-shrink: 0;
+      width: 32px;
+      padding: 0;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn:hover { background: #e5e7eb; }
+    .icon-btn.spinning { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    button.success {
+      margin-top: 12px;
+      width: 100%;
+      padding: 9px;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      background: #10b981;
+    }
+    button.success:hover { filter: brightness(1.05); }
+
+    .status { margin-top: 8px; font-size: 12px; min-height: 16px; }
+    .ok { color: #059669; }
+    .err { color: #dc2626; }
+    .model-meta { font-size: 11px; color: #6b7280; margin-top: 4px; }
+    .tier-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 1px 6px;
+      border-radius: 999px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .tier-small  { background: #fef3c7; color: #92400e; }
+    .tier-medium { background: #dbeafe; color: #1e40af; }
+    .tier-large  { background: #dcfce7; color: #166534; }
+
+    .auto-save-hint { font-size: 10px; color: #9ca3af; margin-top: 8px; text-align: center; }
+    .endpoint-hint { font-size: 10px; color: #9ca3af; margin-top: 3px; line-height: 1.5; }
+    .endpoint-hint code {
+      background: #f3f4f6; padding: 1px 4px; border-radius: 3px;
+      font-family: ui-monospace, Menlo, monospace; font-size: 10px;
+    }
+    .optional-tag { font-size: 10px; color: #9ca3af; font-weight: 400; }
+
+    .empty-state {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      color: #92400e;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .empty-state code {
+      background: rgba(0,0,0,0.08);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-family: ui-monospace, Menlo, monospace;
+    }
+    .advanced-toggle {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #6b7280;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .advanced-toggle:hover { color: #374151; }
+    #advanced { display: none; }
+    #advanced.open { display: block; }
+  </style>
+</head>
+<body>
+  <div class="brand">
+    <div class="brand-logo">T</div>
+    <div>
+      <div class="brand-name">TextForge</div>
+      <div class="brand-tag">Local AI writing assistant</div>
+    </div>
+  </div>
+
+  <div class="label-row">
+    <span>AI Endpoint</span>
+    <button id="reset-endpoint" class="link-btn" title="Reset to local default">Use localhost</button>
+  </div>
+  <input id="endpoint" type="text" placeholder="http://localhost:11434" style="margin-top:4px;">
+  <div class="endpoint-hint">
+    Ollama: <code>http://localhost:11434</code><br>
+    LM Studio: <code>http://localhost:1234</code> · works with any OpenAI-compatible server
+  </div>
+
+  <label class="label-row" style="margin-top:14px;"><span>Model</span></label>
+  <div class="row-with-btn">
+    <select id="model"><option value="">Loading…</option></select>
+    <button id="refresh" class="icon-btn" title="Refresh model list">⟳</button>
+  </div>
+  <div id="model-meta" class="model-meta"></div>
+
+  <div class="advanced-toggle" id="advanced-toggle">▸ Advanced</div>
+  <div id="advanced">
+    <label class="label-row"><span>API Key <span class="optional-tag">(optional)</span></span></label>
+    <input id="apikey" type="password" placeholder="Leave blank for local use" style="margin-top:4px;">
+    <div class="endpoint-hint">Only needed for secured/remote servers or LM Studio with a key set.</div>
+  </div>
+
+  <button id="test" class="success">Test Generation</button>
+  <div id="status" class="status"></div>
+  <div class="auto-save-hint">Changes are saved automatically</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
