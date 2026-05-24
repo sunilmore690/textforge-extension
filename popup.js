@@ -30,17 +30,51 @@ advancedToggle.addEventListener('click', () => {
   advancedToggle.textContent = (open ? '▾' : '▸') + ' Advanced';
 });
 
+// ---- Permission helpers ----
+function isLocalhost(url) {
+  try {
+    const { hostname } = new URL(url);
+    return hostname === 'localhost' || hostname === '127.0.0.1';
+  } catch { return false; }
+}
+
+function originPattern(url) {
+  try {
+    const u = new URL(url);
+    return u.origin + '/*';   // e.g. "http://192.168.1.10:11434/*"
+  } catch { return null; }
+}
+
+function requestPermission(url) {
+  return new Promise(resolve => {
+    const pattern = originPattern(url);
+    if (!pattern) { resolve(false); return; }
+    chrome.permissions.request({ origins: [pattern] }, granted => resolve(!!granted));
+  });
+}
+
 // ---- Auto-save endpoint ----
-endpointEl.addEventListener('change', () => {
+endpointEl.addEventListener('change', async () => {
   const v = endpointEl.value.trim();
   if (!v) { endpointEl.value = savedEndpoint; return; }
-  if (v !== savedEndpoint) {
-    chrome.storage.sync.set({ endpoint: v }, () => {
-      savedEndpoint = v;
-      flashStatus('✓ Endpoint saved — refreshing models', 'ok', 2000);
-      loadModels();
-    });
+  if (v === savedEndpoint) return;
+
+  // Non-localhost endpoints need an explicit user permission grant
+  if (!isLocalhost(v)) {
+    flashStatus('Requesting access to ' + v + '…', '');
+    const granted = await requestPermission(v);
+    if (!granted) {
+      flashStatus('✗ Permission denied — endpoint not saved', 'err', 4000);
+      endpointEl.value = savedEndpoint;   // revert field
+      return;
+    }
   }
+
+  chrome.storage.sync.set({ endpoint: v }, () => {
+    savedEndpoint = v;
+    flashStatus('✓ Endpoint saved — refreshing models', 'ok', 2000);
+    loadModels();
+  });
 });
 endpointEl.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); endpointEl.blur(); }
