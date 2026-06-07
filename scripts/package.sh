@@ -32,6 +32,7 @@ cd "$ROOT"
 zip -r "$OUTPUT" . \
   --exclude ".git/*" \
   --exclude ".github/*" \
+  --exclude ".claude/*" \
   --exclude "CLAUDE.md" \
   --exclude "dist/*" \
   --exclude "scripts/*" \

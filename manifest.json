@@ -3,7 +3,7 @@
   "name": "TextForge - Local AI Writing Assistant",
   "version": "1.1.0",
   "description": "Rewrite, summarize & polish text using your local AI. Works with Ollama, LM Studio, and any OpenAI-compatible server. 100% private.",
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage"],
   "host_permissions": [
     "http://localhost/*",
     "http://127.0.0.1/*"
